@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/'
+require './lib/ship'
 
 class Test < Minitest::Test
   def setup
@@ -13,24 +13,24 @@ class Test < Minitest::Test
   end
 
   def test_it_has_a_name
-    assert_equal "Cruiser", cruiser.name
+    assert_equal "Cruiser", @cruiser.name
   end
 
   def test_its_length
-    assert_equal 3, cruiser.length
+    assert_equal 3, @cruiser.length
   end
 
   def test_its_health
-    assert_equal 3, cruiser.health
+    assert_equal 3, @cruiser.health
   end
 
   def test_its_sunk?
-    assert_equal false, cruiser.sunk?
+    assert_equal false, @cruiser.sunk?
   end
 
   def test_its_been_hit
     @cruiser.hit
-    assert_equal 2, cruiser.health
+    assert_equal 2, @cruiser.health
   end
 
 end
