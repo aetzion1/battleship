@@ -58,30 +58,30 @@ class Test < Minitest::Test
     # skip
     @cell.place_ship(@cruiser)
     @cell.fire_upon
-    # binding.pry # WHY DOESNT THIS WORK?
+
     assert_equal 2, @cell.ship.health
     assert_equal true, @cell.fired_upon
   end
 
   def test_it_can_render
-    skip
+    # skip
 
     assert_equal ".", @cell_1.render
   end
 
   def test_it_can_be_fired_upon_2
-    skip
+    # skip
     @cell_1.fire_upon
-
+    # binding.pry
     assert_equal true, @cell_1.fired_upon
     assert_equal "M", @cell_1.render
   end
 
   def test_another_can_be_rendered
-    skip
+    # skip
     @cell_1.fire_upon
     @cruiser = Ship.new("Cruiser", 3)
-    @cell_2.place_ship(cruiser)
+    @cell_2.place_ship(@cruiser)
 
     assert_equal ".", @cell_2.render
   end
@@ -96,28 +96,28 @@ class Test < Minitest::Test
   end
 
   def test_it_can_render_after_fired_upon
-    skip
+    # skip
     @cell_1.fire_upon
     @cruiser = Ship.new("Cruiser", 3)
-    @cell_2.place_ship(cruiser)
+    @cell_2.place_ship(@cruiser)
     @cell_2.fire_upon
 
     assert_equal "H", @cell_2.render
     assert_equal 2, @cell_2.ship.health
-    refute @cell_2.sunk?
+    refute @cell_2.ship.sunk?
   end
 
   def test_ship_can_be_sunk
-    skip
+    # skip
     @cell_1.fire_upon
     cruiser = Ship.new("Cruiser", 3)
-    @cell_2.place_ship(cruiser)
+    @cell_2.place_ship(@cruiser)
     @cell_2.fire_upon
-    cruiser.hit
-    cruiser.hit
+    @cruiser.hit
+    @cruiser.hit
 
     assert_equal "X", @cell_2.render
     assert_equal 0, @cell_2.ship.health
-    assert @cell_2.sunk?
+    assert @cell_2.ship.sunk?
   end
 end

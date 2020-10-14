@@ -24,7 +24,19 @@ class Cell
     end
   end
 
-  def render()
+  def render # add option???
+    # switch or case statement
+    # if option = true && @ship
+    #   "S"
+    if @fired_upon == false
+      "."
+    elsif @ship == nil
+      "M"
+    elsif
+      @ship && @ship.sunk? == false
+      "H"
+    else "X"
+    end
   end
 
 end
