@@ -87,12 +87,12 @@ class Test < Minitest::Test
   end
 
   def test_it_can_show_ship
-    skip
+    # skip
     @cell_1.fire_upon
     @cruiser = Ship.new("Cruiser", 3)
-    @cell_2.place_ship(cruiser)
+    @cell_2.place_ship(@cruiser)
 
-    assert_equal "S", cell_2.render(true)
+    assert_equal "S", @cell_2.render(true)
   end
 
   def test_it_can_render_after_fired_upon

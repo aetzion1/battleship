@@ -24,11 +24,11 @@ class Cell
     end
   end
 
-  def render # add option???
+  def render(option = false)
     # switch or case statement
-    # if option = true && @ship
-    #   "S"
-    if @fired_upon == false
+    if option == true && @ship
+      "S"
+    elsif @fired_upon == false
       "."
     elsif @ship == nil
       "M"
