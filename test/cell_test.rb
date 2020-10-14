@@ -2,11 +2,13 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/ship'
 require './lib/cell'
+require "pry"
 
 class Test < Minitest::Test
 
   def setup
     @cell = Cell.new("B4")
+    @cruiser = Ship.new("Cruiser", 3)
     @cell_1 = @cell
     @cell_2 = Cell.new("C3")
   end
@@ -29,29 +31,42 @@ class Test < Minitest::Test
 
   def test_ship_placement
     # skip
-    cruiser = Ship.new("Cruiser", 3)
-    @cell.place_ship(cruiser)
+    @cell.place_ship(@cruiser)
 
-    assert_equal cruiser, @cell.ship
+    assert_equal @cruiser, @cell.ship
   end
 
-  def test_it_is_empty
+  def test_it_is_empty_after_ship_placed
     # skip
-    @cruiser = Ship.new("Cruiser", 3)
     @cell.place_ship(@cruiser)
     assert_equal false, @cell.empty?
   end
 
+  def it_can_tell_if_its_been_fired_upon
+    @cell.place_ship(@cruiser)
+    assert_equal false, cell.fired_upon?
+  end
+
+  def it_can_be_fired_upon
+    @cell.place_ship(@cruiser)
+    cell.fire_upon
+    assert_equal 2, @cell.ship.health
+    assert @cell.fired_upon?
+  end
+
   def test_it_can_render
+    skip
     assert_equal ".", @cell_1.render
   end
 
   def test_it_can_be_fired_upon
+    skip
     @cell_1.fire_upon
     assert_equal "M", cell_1.render
   end
 
   def test_another_can_be_rendered
+    skip
     @cell_1.fire_upon
     @cruiser = Ship.new("Cruiser", 3)
     @cell_2.place_ship(cruiser)
@@ -59,6 +74,7 @@ class Test < Minitest::Test
   end
 
   def test_it_can_show_ship
+    skip
     @cell_1.fire_upon
     @cruiser = Ship.new("Cruiser", 3)
     @cell_2.place_ship(cruiser)
@@ -66,6 +82,7 @@ class Test < Minitest::Test
   end
 
   def test_it_can_render_after_fired_upon
+    skip
     @cell_1.fire_upon
     @cruiser = Ship.new("Cruiser", 3)
     @cell_2.place_ship(cruiser)
@@ -76,6 +93,7 @@ class Test < Minitest::Test
   end
 
   def test_ship_can_be_sunk
+    skip
     @cell_1.fire_upon
     cruiser = Ship.new("Cruiser", 3)
     @cell_2.place_ship(cruiser)

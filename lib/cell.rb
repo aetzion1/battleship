@@ -16,4 +16,10 @@ class Cell
     @ship = ship_name
   end
 
+  def fired_upon?
+  end
+
+  def fire_upon
+  end
+
 end
