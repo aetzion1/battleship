@@ -22,6 +22,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_coordinates_valid
+    skip
     assert_equal true, @board.valid_coordinate?("A1")
     assert_equal true, @board.valid_coordinate?("D4")
     assert_equal false, @board.valid_coordinate?("A5")
@@ -30,8 +31,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_ship_array
-    # binding.pry
-    refute @board.valid_placement?(@cruiser, ["A1", "A2"])
-    refute @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
   end
 end
