@@ -31,11 +31,12 @@ class Board
    end
 
    def valid_placement?(ship, coordinates = [])
-     cells_ord = coordinates.map do |cell|
-       cell.split("")
+     y = coordinates.map do |coordinate|
+       coordinate.bytes
      end
-     cells_ord = cells_ord.map do |cell|
-       cell.ord
+     z = y.map do |coordinate|
+       coordinate.sum
      end
+     z.max - z.min == ship.length - 1
    end
 end
