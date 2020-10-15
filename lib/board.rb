@@ -37,6 +37,7 @@ class Board
      z = y.map do |coordinate|
        coordinate.sum
      end
-     z.max - z.min == ship.length - 1
+      (z.last - z.first == ship.length - 1) && coordinates.to_s.tr("0-9", "").chars.each_cons(2).any? { |a,b| a == b }
    end
+
 end
