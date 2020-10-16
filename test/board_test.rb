@@ -55,8 +55,8 @@ class BoardTest < Minitest::Test
   end
 
   def test_edge_case
-    skip
-        assert_equal false, @board.valid_placement?(@submarine, ["A2", "C1"])
+    # skip
+    assert_equal false, @board.valid_placement?(@submarine, ["A2", "C1"])
   end
 
   def test_it_can_place
@@ -81,7 +81,10 @@ class BoardTest < Minitest::Test
 
   def test_it_can_render_the_board
     @board.place(@cruiser, ["A1", "A2", "A3"])
+    expected =  "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
 
-    assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", @board.render
+    assert_equal expected, @board.render()
+    assert_equal expected2, @board.render(true)
   end
 end

@@ -2,7 +2,7 @@ require 'pry'
 require './lib/cell'
 require './lib/ship'
 class Board
-  attr_reader :cells, :row, :columm
+  attr_reader :cells, :row, :columm, :status
 
    def initialize(board_size = 4)
      @board_size = board_size
@@ -32,27 +32,44 @@ class Board
    end
 
    def valid_placement?(ship, coordinates = [])
-
+     # CHANGE LETTERS TO ASCII
+     letters = coordinates.map do |coordinate|
+       coordinate.ord
+     end
+     # CHANGE NUMBERS TO ASCII
+     numbers = coordinates.map do |coordinate|
+       coordinate.slice(1).to_i
+     end
+     # CHANGE LETTER+NUMBER TO ASCII
+     ascii = coordinates.map do |coordinate|
+       coordinate.bytes.inject(:+)
+     end
+     # CHECK IF HAS SHIP
      return false if coordinates.any? do |coordinate|
        @cells[coordinate].ship
      end
-
-     y = coordinates.map do |coordinate|
-       coordinate.bytes
-     end
-     z = y.map do |coordinate|
-       coordinate.sum
-     end
-      (z.last - z.first == ship.length - 1) #&&
-      # coordinates.to_s.delete('^A-Z').chars.each_cons(2).any? {|a,b| a == b }
-       # end) or x = coordinates.map do |cell|
-       #   cell.ord
-       # end.uniq.count <= 1)
+     # CHECK IF RIGHT NUMBER OF SPACES
+     return false if ship.length != coordinates.length
+     # CHECK EITHER NUMS OR LETTERS ARE SAME
+     binding.pry
+     return false if numbers.uniq.length !=1 && letters.uniq.length !=1
+     # CHECK IF LETTERS SAME and NUMS CONS
+     return false if (letters.uniq.length == 1) &&
+     !(numbers.each_cons(2).all? do |number|
+       p number
+     end)
+     # CHECK IF NUMS SAME AND LETTERS CONS
+     return false if (numbers.uniq.length == 1) &&
+     !(letters.each_cons(2).all? do |letter|
+        p letter
+      end)
+     # CHECK IF CONSECUTIVE, BUT NOT DIAGONAL
+     return false if (ascii.last - ascii.first) != ship.length - 1
+   else true
    end
 
    def place(ship,coordinate)
      # binding.pry
-
      if coordinate.all? do |coordinate|
        @cells[coordinate].empty?
       end
@@ -61,5 +78,16 @@ class Board
         @cells[coordinate].place_ship(ship)
      end
    end
+
+
+   def render(option = nil)
+     binding.pry
+     #USE CONCAT TO MAKE IT DYNAMIC (BASED ON BOARD SIZE)
+     " 1 2 3 4 \n" +
+       "A #{@cells["A1"].render(option)} #{@cells["A2"].render(option)} #{@cells["A3"].render(option)} #{@cells["A4"].render(option)}\n" +
+       "B #{@cells["B1"].render(option)} #{@cells["B2"].render(option)} #{@cells["B3"].render(option)} #{@cells["B4"].render(option)}\n" +
+       "C #{@cells["C1"].render(option)} #{@cells["C2"].render(option)} #{@cells["C3"].render(option)} #{@cells["C4"].render(option)}\n" +
+       "D #{@cells["D1"].render(option)} #{@cells["D2"].render(option)} #{@cells["D3"].render(option)} #{@cells["D4"].render(option)}\n"
    end
+  end
 end

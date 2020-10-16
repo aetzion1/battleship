@@ -4,6 +4,8 @@ class Cell
   def initialize (coordinate, ship = nil, fired_upon = false)
     @coordinate = coordinate
     @fired_upon = fired_upon
+    # ADAM ADDED THIS
+    # @status = status
   end
 
   def empty?
@@ -18,13 +20,13 @@ class Cell
   end
 
   def fire_upon
-    @fired_upon = true
-    if @ship
-      @ship.hit
+      @fired_upon = true
+      if @ship
+        @ship.hit
+      end
     end
-  end
 
-  def render(option = false)
+  def render(option = nil)
     # switch or case statement
     if option == true && @ship
       "S"
@@ -38,6 +40,4 @@ class Cell
     else "X"
     end
   end
-
-
 end
