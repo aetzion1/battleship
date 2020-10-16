@@ -45,7 +45,7 @@ class Board
    end
 
    def place(ship,coordinate)
-     unless @cells[coordinate] has a ship
+     unless @cells[coordinate].empty?
        false
      else
        @cells[coordinate].place_ship
