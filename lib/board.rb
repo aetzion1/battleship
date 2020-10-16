@@ -1,5 +1,6 @@
 require 'pry'
-
+require './lib/cell'
+require './lib/ship'
 class Board
   attr_reader :cells, :row, :columm
 
@@ -31,6 +32,11 @@ class Board
    end
 
    def valid_placement?(ship, coordinates = [])
+
+     return false if coordinates.any? do |coordinate|
+       @cells[coordinate].ship
+     end
+
      y = coordinates.map do |coordinate|
        coordinate.bytes
      end
@@ -44,4 +50,16 @@ class Board
        # end.uniq.count <= 1)
    end
 
+   def place(ship,coordinate)
+     # binding.pry
+
+     if coordinate.all? do |coordinate|
+       @cells[coordinate].empty?
+      end
+    end
+      if coordinate.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
+     end
+   end
+   end
 end
