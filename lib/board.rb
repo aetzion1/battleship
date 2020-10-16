@@ -32,18 +32,38 @@ class Board
    end
 
    def valid_placement?(ship, coordinates = [])
-
+     letters = coordinates.map do |coordinate|
+       coordinate.ord
+     end
+     numbers = coordinates.map do |coordinate|
+       coordinate.slice(1).to_i
+     end
+     ascii = coordinates.map do |coordinate|
+       coordinate.bytes.inject(:+)
+     end
+     # CHECK IF HAS SHIP
      return false if coordinates.any? do |coordinate|
        @cells[coordinate].ship
      end
+     # CHECK IF RIGHT NUMBER OF SPACES
+     return false if coordinates.any? do |coordinate|
+       ship.length != coordinates.length
+     end
+     # CHECK EITHER NUMS OR LETTERS ARE SAME
+     return false if numbers.uniq.length !=1 && letters.uniq.length !=1
+     # CHECK IF (1) LETTERS SAME and (2) NUMS CONS
+     return false if (letters.uniq.length == 1) &&
+     !(numbers.each_cons(2).all? do |number|
+       p number
+     end)
+     # CHECK IF NUMS SAME AND LETTERS CONS
+     return false if (numbers.uniq.length == 1) &&
+     !(letters.each_cons(2).all? { |letter| p letter})
 
-     y = coordinates.map do |coordinate|
-       coordinate.bytes
-     end
-     z = y.map do |coordinate|
-       coordinate.sum
-     end
-      (z.last - z.first == ship.length - 1) #&&
+     # CHECK IF CONSECUTIVE, BUT NOT DIAGONAL
+     return false if (ascii.last - ascii.first) != ship.length - 1
+   else true
+
       # coordinates.to_s.delete('^A-Z').chars.each_cons(2).any? {|a,b| a == b }
        # end) or x = coordinates.map do |cell|
        #   cell.ord
@@ -52,7 +72,6 @@ class Board
 
    def place(ship,coordinate)
      # binding.pry
-
      if coordinate.all? do |coordinate|
        @cells[coordinate].empty?
       end
@@ -61,5 +80,5 @@ class Board
         @cells[coordinate].place_ship(ship)
      end
    end
-   end
+  end
 end

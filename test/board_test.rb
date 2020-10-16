@@ -55,33 +55,33 @@ class BoardTest < Minitest::Test
   end
 
   def test_edge_case
-    skip
-        assert_equal false, @board.valid_placement?(@submarine, ["A2", "C1"])
+    # skip
+    assert_equal false, @board.valid_placement?(@submarine, ["A2", "C1"])
   end
-
-  def test_it_can_place
-  @board.place(@cruiser, ["A1", "A2", "A3"])
-  assert_equal @board.cells["A1"], @board.cells["A1"]
-  assert_equal @board.cells["A2"], @board.cells["A2"]
-  assert_equal @board.cells["A3"], @board.cells["A3"]
-  end
-
-  def test_it_has_the_same_ship
-  @board.place(@cruiser, ["A1", "A2", "A3"])
-
-  assert_equal true, @board.cells["A3"].ship == @board.cells["A2"].ship
-  end
-
-  def test_it_already_has_a_ship
-  @board.place(@cruiser, ["A1", "A2", "A3"])
-
-
-  assert_equal false, @board.valid_placement?(@submarine, ["A1","B1"])
-  end
-
-  def test_it_can_render_the_board
-    @board.place(@cruiser, ["A1", "A2", "A3"])
-
-    assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", @board.render
-  end
+  #
+  # def test_it_can_place
+  # @board.place(@cruiser, ["A1", "A2", "A3"])
+  # assert_equal @board.cells["A1"], @board.cells["A1"]
+  # assert_equal @board.cells["A2"], @board.cells["A2"]
+  # assert_equal @board.cells["A3"], @board.cells["A3"]
+  # end
+  #
+  # def test_it_has_the_same_ship
+  # @board.place(@cruiser, ["A1", "A2", "A3"])
+  #
+  # assert_equal true, @board.cells["A3"].ship == @board.cells["A2"].ship
+  # end
+  #
+  # def test_it_already_has_a_ship
+  # @board.place(@cruiser, ["A1", "A2", "A3"])
+  #
+  #
+  # assert_equal false, @board.valid_placement?(@submarine, ["A1","B1"])
+  # end
+  #
+  # def test_it_can_render_the_board
+  #   @board.place(@cruiser, ["A1", "A2", "A3"])
+  #
+  #   assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", @board.render
+  # end
 end
