@@ -37,7 +37,11 @@ class Board
      z = y.map do |coordinate|
        coordinate.sum
      end
-      (z.last - z.first == ship.length - 1) && coordinates.to_s.tr("0-9", "").chars.each_cons(2).any? { |a,b| a == b }
+      (z.last - z.first == ship.length - 1) #&&
+      # coordinates.to_s.delete('^A-Z').chars.each_cons(2).any? {|a,b| a == b }
+       # end) or x = coordinates.map do |cell|
+       #   cell.ord
+       # end.uniq.count <= 1)
    end
 
 end
