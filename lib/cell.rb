@@ -1,11 +1,11 @@
 class Cell
-  attr_reader :coordinate, :ship, :fired_upon, :status
+  attr_reader :coordinate, :ship, :fired_upon
 
-  def initialize (coordinate, ship = nil, fired_upon = false, status = ".")
+  def initialize (coordinate, ship = nil, fired_upon = false)
     @coordinate = coordinate
     @fired_upon = fired_upon
     # ADAM ADDED THIS
-    @status = status
+    # @status = status
   end
 
   def empty?
@@ -20,31 +20,24 @@ class Cell
   end
 
   def fire_upon
-    @fired_upon = true
-    if @ship
-      #ADAM ADDED THIS
-      if @ship.health <= 1
-        @ship.hit && @status = "X"
-      else @ship.hit && @status = "H"
+      @fired_upon = true
+      if @ship
+        @ship.hit
       end
-    else @status = "M"
     end
-    #
+
+  def render(option = nil)
+    # switch or case statement
+    if option == true && @ship
+      "S"
+    elsif @fired_upon == false
+      "."
+    elsif @ship == nil
+      "M"
+    elsif
+      @ship && @ship.sunk? == false
+      "H"
+    else "X"
+    end
   end
-
 end
-
-  # def render(option = nil)
-  #   # switch or case statement
-  #   if option == true && @ship
-  #     "S"
-  #   elsif @fired_upon == false
-  #     "."
-  #   elsif @ship == nil
-  #     "M"
-  #   elsif
-  #     @ship && @ship.sunk? == false
-  #     "H"
-  #   else "X"
-  #   end
-  # end
