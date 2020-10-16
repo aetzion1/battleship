@@ -2,7 +2,7 @@ require 'pry'
 require './lib/cell'
 require './lib/ship'
 class Board
-  attr_reader :cells, :row, :columm
+  attr_reader :cells, :row, :columm, :status
 
    def initialize(board_size = 4)
      @board_size = board_size
@@ -51,7 +51,7 @@ class Board
      end
      # CHECK EITHER NUMS OR LETTERS ARE SAME
      return false if numbers.uniq.length !=1 && letters.uniq.length !=1
-     # CHECK IF (1) LETTERS SAME and (2) NUMS CONS
+     # CHECK IF LETTERS SAME and NUMS CONS
      return false if (letters.uniq.length == 1) &&
      !(numbers.each_cons(2).all? do |number|
        p number
@@ -59,15 +59,9 @@ class Board
      # CHECK IF NUMS SAME AND LETTERS CONS
      return false if (numbers.uniq.length == 1) &&
      !(letters.each_cons(2).all? { |letter| p letter})
-
      # CHECK IF CONSECUTIVE, BUT NOT DIAGONAL
      return false if (ascii.last - ascii.first) != ship.length - 1
    else true
-
-      # coordinates.to_s.delete('^A-Z').chars.each_cons(2).any? {|a,b| a == b }
-       # end) or x = coordinates.map do |cell|
-       #   cell.ord
-       # end.uniq.count <= 1)
    end
 
    def place(ship,coordinate)
@@ -79,6 +73,20 @@ class Board
       if coordinate.each do |coordinate|
         @cells[coordinate].place_ship(ship)
      end
+   end
+
+
+   def render(show = nil)
+     binding.pry
+     " 1 2 3 4 \n".concat(
+       "A ",
+       if @cells["A1"].status.health == 0
+         p "X"
+
+       #{@cells.} \n"
+
+       # @cells.sort.each do |cell|
+         # binding.pry
    end
   end
 end
