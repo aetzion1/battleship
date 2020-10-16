@@ -79,11 +79,15 @@ class Board
    def render(show = nil)
      binding.pry
      " 1 2 3 4 \n".concat(
-       "A ",
-       if @cells["A1"].status.health == 0
-         p "X"
+       "A ", "#{@cells["A1"].status} #{@cells["A2"].status} #{@cells["A3"].status} #{@cells["A4"].status}\n",
+       "B ", "#{@cells["B1"].status} #{@cells["B2"].status} #{@cells["B3"].status} #{@cells["B4"].status}\n",
+       "C ", "#{@cells["C1"].status} #{@cells["C2"].status} #{@cells["C3"].status} #{@cells["C4"].status}\n",
+       "D ", "#{@cells["D1"].status} #{@cells["D2"].status} #{@cells["D3"].status} #{@cells["D4"].status}")
 
-       #{@cells.} \n"
+       # if @cells["A1"].status.health == 0
+       #   p "X"
+       #
+       # #{@cells.} \n"
 
        # @cells.sort.each do |cell|
          # binding.pry

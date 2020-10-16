@@ -1,10 +1,10 @@
 class Cell
-  attr_reader :coordinate, :ship, :fired_upon
+  attr_reader :coordinate, :ship, :fired_upon, :status
 
   def initialize (coordinate, ship = nil, fired_upon = false, status = ".")
     @coordinate = coordinate
     @fired_upon = fired_upon
-    # ADDED THIS
+    # ADAM ADDED THIS
     @status = status
   end
 
@@ -22,13 +22,17 @@ class Cell
   def fire_upon
     @fired_upon = true
     if @ship
-      #EDIT
+      #ADAM ADDED THIS
       if @ship.health <= 1
-      @ship.hit && @status == "X"
-    else @status == "H"
-    else @status == "M"
+        @ship.hit && @status = "X"
+      else @ship.hit && @status = "H"
+      end
+    else @status = "M"
     end
+    #
   end
+
+end
 
   # def render(option = nil)
   #   # switch or case statement
@@ -44,6 +48,3 @@ class Cell
   #   else "X"
   #   end
   # end
-
-
-end
