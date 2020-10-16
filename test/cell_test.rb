@@ -120,4 +120,5 @@ class Test < Minitest::Test
     assert_equal 0, @cell_2.ship.health
     assert @cell_2.ship.sunk?
   end
+
 end

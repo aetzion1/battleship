@@ -44,4 +44,8 @@ class Board
        # end.uniq.count <= 1)
    end
 
+   def place(ship,coordinate)
+       @cells[coordinate].place_ship
+   end
+
 end
