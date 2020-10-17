@@ -32,7 +32,22 @@ class Game
 
     player_board.render
 
-    puts "Enter the squares for the Cruiser (3 spaces):"
+    puts "Enter the squares for the Cruiser (3 spaces):\n >"
+
+    crusier_coord = gets.chomp
+    cruiser = Ship.new("Cruiser", 3)
+    if player_board.validplacement?(cruiser, crusier_coord)
+      player_board.place(cruiser, crusier_coord)
+    else puts "Invalid Placement"
+
+    player_board.render(true)
+
+    puts "Enter the squares for the Submarine (2 spaces):\n >"
+
+    sub_coord = gets.chomp
+    submarine = Ship.new("Submarine", 3)
+    player_board.validplacement?(submarine, sub_coord)
+    player_board.render(true)
 
   end
 
