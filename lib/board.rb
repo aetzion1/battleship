@@ -51,7 +51,6 @@ class Board
      # CHECK IF RIGHT NUMBER OF SPACES
      return false if ship.length != coordinates.length
      # CHECK EITHER NUMS OR LETTERS ARE SAME
-     binding.pry
      return false if numbers.uniq.length !=1 && letters.uniq.length !=1
      # CHECK IF LETTERS SAME and NUMS CONS
      return false if (letters.uniq.length == 1) &&
@@ -65,11 +64,10 @@ class Board
       end)
      # CHECK IF CONSECUTIVE, BUT NOT DIAGONAL
      return false if (ascii.last - ascii.first) != ship.length - 1
-   else true
-   end
+    end
 
    def place(ship,coordinate)
-     # binding.pry
+
      if coordinate.all? do |coordinate|
        @cells[coordinate].empty?
       end
@@ -81,7 +79,6 @@ class Board
 
 
    def render(option = nil)
-     binding.pry
      #USE CONCAT TO MAKE IT DYNAMIC (BASED ON BOARD SIZE)
      " 1 2 3 4 \n" +
        "A #{@cells["A1"].render(option)} #{@cells["A2"].render(option)} #{@cells["A3"].render(option)} #{@cells["A4"].render(option)}\n" +
