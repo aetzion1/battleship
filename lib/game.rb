@@ -27,18 +27,17 @@ class Game
     puts "Welcome to BATTLESHIP\n
     Enter p to play. Enter q to quit."
 
-    answer = gets.chomp
+    answer = $stdin.gets.chomp
 
-    if answer == "q" puts "Come back when you're worthy!"
-
-    elsif answer == "p" self.start
-
-    else
-    self.welcome
+    if answer == "q"
+      puts "Come back when you're worthy!"
+    elsif answer == "p"
+      self.start
+    end
   end
 
-    def start
-        puts "I have laid out my ships on the grid.\n
+  def start
+    puts "I have laid out my ships on the grid.\n
     You now need to lay out your two ships.\n
     The Cruiser is three units long and the Submarine is two units long.\n"
 
@@ -46,28 +45,6 @@ class Game
 
     puts "Enter the squares for the Cruiser (3 spaces):\n >"
     crusier_coord = gets.chomp.split(" ")
-
-    end
   end
-
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  # binding.pry
 end
