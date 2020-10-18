@@ -1,15 +1,13 @@
+require './lib/player'
+require './lib/board'
 require './lib/cell'
 require './lib/ship'
-require './lib/board'
+require './lib/messages'
 require 'pry'
 
 class Game
-  attr_reader :player_board,
-              :pc_board,
-              :cruiser,
-              :submarine,
-              :pc_cruiser,
-              :pc_submarine
+  attr_reader :player_board, :pc_board, :cruiser, :submarine, :pc_cruiser, :pc_submarine
+  include Messages
 
   def initialize
     @player_board = Board.new
@@ -18,33 +16,29 @@ class Game
     @submarine = Ship.new("Submarine", 2)
     @pc_cruiser = Ship.new("Cruiser", 3)
     @pc_submarine = Ship.new("Submarine", 2)
-
-    welcome
-  end
-
-  def welcome
-
-    puts "Welcome to BATTLESHIP\n
-    Enter p to play. Enter q to quit."
-
-    answer = $stdin.gets.chomp
-
-    if answer == "q"
-      puts "Come back when you're worthy!"
-    elsif answer == "p"
-      self.start
-    end
   end
 
   def start
-    puts "I have laid out my ships on the grid.\n
-    You now need to lay out your two ships.\n
-    The Cruiser is three units long and the Submarine is two units long.\n"
-
-    @player_board.render
-
-    puts "Enter the squares for the Cruiser (3 spaces):\n >"
-    crusier_coord = gets.chomp.split(" ")
+    welcome_message
+    answer = gets.chomp.downcase
+    if answer == 'q'
+      try_again
+    elsif answer == 'p'
+      setup
+    else start
+    end
   end
-  # binding.pry
+
+  def setup
+    setup_message
+
+    puts @player_board.render()
+
+    # puts "Enter the squares for the Cruiser (3 spaces):"
+    # print "> "
+    # input = gets.chomp
+    # # convert to split.. etc.
+    # if @player_board.valid_placement?(input)
+    #
+  end
 end
