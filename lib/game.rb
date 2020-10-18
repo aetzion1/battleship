@@ -86,7 +86,7 @@ class Game
 
   def turn
     puts "=============COMPUTER BOARD=============\n"
-     @pc_board.render(true)
+     @pc_board.render(true)#Remember to remove true
     puts "==============PLAYER BOARD==============\n"
      @player_board.render(true)
 
@@ -99,8 +99,17 @@ class Game
       end
 
       @pc_board.cells[player_shot].fire_upon
-      # binding.pry
       puts "Your shot on #{player_shot} #{pc_status(player_shot)}"
+
+      #PC Shoots
+      pc_shot= @player_board.cells.keys.sample(1).join
+      binding.pry
+
+      until @player_board.cells[pc_shot].fired_upon == false
+        pc_shot = @player_board.cells.keys.sample(1).join
+      end
+      @player_board.cells[pc_shot].fire_upon
+      puts "Thier shot on #{pc_shot} #{player_status(pc_shot)}"
     end
 
     def pc_status(x)
@@ -113,8 +122,20 @@ class Game
         "sunk the a ship!"
       end
     end
+
+    def player_status(x)
+      if @player_board.cells[x].render == "H"
+        "hit a ship!"
+      elsif
+        @player_board.cells[x].render == "M"
+        "missed!"
+      else @player_board.cells[x].render == "X"
+        "sunk the a ship!"
+      end
+    end
+
   end
 
-    # computer_shot
-
+#Turns until no ship on one side
+#Declare winner
 # break when either pc_board.ships sunk? or player_board ships usnk
