@@ -11,7 +11,7 @@ class BoardTest < Minitest::Test
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
   end
-
+# binding.pry
   def test_it_exists
     assert_instance_of Board, @board
   end
@@ -44,6 +44,9 @@ class BoardTest < Minitest::Test
 
   def test_coordinates_diagonal
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "B2", "C3"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "C2"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A4", "C2"])
     assert_equal false, @board.valid_placement?(@submarine, ["C2", "D3"])
   end
 
