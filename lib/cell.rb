@@ -4,8 +4,6 @@ class Cell
   def initialize (coordinate, ship = nil, fired_upon = false)
     @coordinate = coordinate
     @fired_upon = fired_upon
-    # ADAM ADDED THIS
-    # @status = status
   end
 
   def empty?
