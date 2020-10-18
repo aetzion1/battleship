@@ -22,7 +22,7 @@ class Game
     welcome_message
     answer = gets.chomp.downcase
     if answer == 'q'
-      try_again
+      quit_message
     elsif answer == 'p'
       setup
     else start
@@ -31,14 +31,38 @@ class Game
 
   def setup
     setup_message
-
     puts @player_board.render()
 
-    # puts "Enter the squares for the Cruiser (3 spaces):"
-    # print "> "
-    # input = gets.chomp
-    # # convert to split.. etc.
-    # if @player_board.valid_placement?(input)
-    #
+    setup_cruiser
+    puts @player_board.render(true)
+
+    setup_sub
+    puts @player_board.render(true)
+  end
+
+  def setup_cruiser
+    player_cruiser_message
+    input = gets.chomp.upcase.split(" ")
+    if input.length != 3
+      try_again_message
+      setup_cruiser
+    end
+    if @player_board.valid_placement?(@cruiser,input)
+      @player_board.place(@cruiser,input)
+    else setup_cruiser
+    end
+  end
+
+  def setup_sub
+    player_sub_message
+    input = gets.chomp.upcase.split(" ")
+    if input.length != 2
+      try_again_message
+      setup_sub
+    end
+    if @player_board.valid_placement?(@submarine,input)
+      @player_board.place(@submarine,input)
+    else setup_sub
+    end
   end
 end
