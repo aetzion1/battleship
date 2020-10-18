@@ -73,36 +73,47 @@ class Game
 
   def setup_sub
     player_sub_message
-    input = gets.chomp.upcase.split(" ")
-    if input.length != 2
+    input_2 = gets.chomp.upcase.split(" ")
+    if input_2.length != 2
       try_again_message
       setup_sub
     end
-    if @player_board.valid_placement?(@submarine,input)
-      @player_board.place(@submarine,input)
+    if @player_board.valid_placement?(@submarine,input_2)
+      @player_board.place(@submarine,input_2)
     else setup_sub
     end
   end
 
   def turn
     puts "=============COMPUTER BOARD=============\n"
-    puts @pc_board.render
+     @pc_board.render(true)
     puts "==============PLAYER BOARD==============\n"
-    puts @player_board.render(true)
+     @player_board.render(true)
 
     puts "Enter the coordinate for your shot:"
       player_shot = gets.chomp.upcase
 
-      until @pc_board.cells[player_shot].fired_upon == false
-        invalid_message
+      until @pc_board.valid_coordinate?(player_shot) && @pc_board.cells[player_shot].fired_upon == false
+          invalid_message
         player_shot = gets.chomp.upcase
       end
 
       @pc_board.cells[player_shot].fire_upon
+      # binding.pry
+      puts "Your shot on #{player_shot} #{pc_status(player_shot)}"
+    end
+
+    def pc_status(x)
+      if @pc_board.cells[x].render == "H"
+        "hit a ship!"
+      elsif
+        @pc_board.cells[x].render == "M"
+        "missed!"
+      else @pc_board.cells[x].render == "X"
+        "sunk the a ship!"
+      end
     end
   end
-      # # hs to be cell on board
-      # until @pc_board.cells.keys.include? player_shot
 
     # computer_shot
 
