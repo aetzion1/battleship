@@ -38,6 +38,24 @@ class Game
 
     setup_sub
     puts @player_board.render(true)
+
+    setup_pc_board
+    # puts @pc_board.render(true)
+    turn
+  end
+
+  def setup_pc_board
+    pc_coord = @pc_board.cells.keys.sample(3)
+    until @pc_board.valid_placement?(@pc_cruiser, pc_coord)
+      pc_coord = @pc_board.cells.keys.sample(3)
+    end
+    @pc_board.place(@pc_cruiser, pc_coord)
+
+    pc_coord_2 = @pc_board.cells.keys.sample(2)
+    until @pc_board.valid_placement?(@pc_submarine, pc_coord_2)
+      pc_coord_2 = @pc_board.cells.keys.sample(2)
+    end
+    @pc_board.place(@pc_submarine, pc_coord_2)
   end
 
   def setup_cruiser
@@ -65,4 +83,27 @@ class Game
     else setup_sub
     end
   end
-end
+
+  def turn
+    puts "=============COMPUTER BOARD=============\n"
+    puts @pc_board.render
+    puts "==============PLAYER BOARD==============\n"
+    puts @player_board.render(true)
+
+    puts "Enter the coordinate for your shot:"
+      player_shot = gets.chomp.upcase
+
+      until @pc_board.cells[player_shot].fired_upon == false
+        invalid_message
+        player_shot = gets.chomp.upcase
+      end
+
+      @pc_board.cells[player_shot].fire_upon
+    end
+  end
+      # # hs to be cell on board
+      # until @pc_board.cells.keys.include? player_shot
+
+    # computer_shot
+
+# break when either pc_board.ships sunk? or player_board ships usnk
