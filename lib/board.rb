@@ -50,7 +50,7 @@ class Board
       @cells[coordinate].ship
     end
     # CHECK IF RIGHT NUMBER OF SPACES
-    return false if ship.length != coordinates.length
+    # return false if ship.length != coordinates.length
     # CHECK EITHER NUMS OR LETTERS ARE SAME
     return false if numbers.uniq.length !=1 && letters.uniq.length !=1
     # CHECK IF LETTERS SAME and NUMS CONS
