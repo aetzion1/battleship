@@ -62,7 +62,7 @@ class Game
     player_cruiser_message
     input = gets.chomp.upcase.split(" ")
     if input.length != 3
-      try_again_message
+      invalid_message
       setup_cruiser
     end
     if @player_board.valid_placement?(@cruiser,input)
@@ -75,7 +75,7 @@ class Game
     player_sub_message
     input_2 = gets.chomp.upcase.split(" ")
     if input_2.length != 2
-      try_again_message
+      invalid_message
       setup_sub
     end
     if @player_board.valid_placement?(@submarine,input_2)
@@ -103,7 +103,6 @@ class Game
 
       #PC Shoots
       pc_shot= @player_board.cells.keys.sample(1).join
-      binding.pry
 
       until @player_board.cells[pc_shot].fired_upon == false
         pc_shot = @player_board.cells.keys.sample(1).join
