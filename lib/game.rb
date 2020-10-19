@@ -1,4 +1,5 @@
 require './lib/player'
+require './lib/pc'
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
@@ -44,7 +45,7 @@ class Game
   def setup_pc_board
     pc_coord = @pc.board.cells.keys.sample(3)
     until @pc.board.valid_placement?(@pc.cruiser, pc_coord)
-      pc.coord = @pc.board.cells.keys.sample(3)
+      pc_coord = @pc.board.cells.keys.sample(3)
     end
     @pc.board.place(@pc.cruiser, pc_coord)
 
@@ -52,7 +53,7 @@ class Game
     until @pc.board.valid_placement?(@pc.submarine, pc_coord_2)
       pc_coord_2 = @pc.board.cells.keys.sample(2)
     end
-    @pc_board.place(@pc.submarine, pc_coord_2)
+    @pc.board.place(@pc.submarine, pc_coord_2)
   end
 
   def setup_cruiser
@@ -62,8 +63,9 @@ class Game
       invalid_message
       setup_cruiser
     end
-    if @player.board.valid_placement?(@cruiser,input)
-      @player.board.place(@cruiser,input)
+
+    if @player.board.valid_placement?(@player.cruiser,input)
+      @player.board.place(@player.cruiser,input)
     else setup_cruiser
     end
   end
@@ -75,8 +77,8 @@ class Game
       invalid_message
       setup_sub
     end
-    if @player.board.valid_placement?(@submarine,input_2)
-      @player.board.place(@submarine,input_2)
+    if @player.board.valid_placement?(@player.submarine,input_2)
+      @player.board.place(@player.submarine,input_2)
     else setup_sub
     end
   end
@@ -96,40 +98,19 @@ class Game
       end
 
       @pc.board.cells[player_shot].fire_upon
-      puts "Your shot on #{player_shot} #{pc_status(player_shot)}"
+      puts "Your shot on #{player_shot} #{@pc.status(player_shot)}"
 
       #PC Shoots
       pc_shot= @player.board.cells.keys.sample(1).join
-      binding.pry
+
 
       until @player.board.cells[pc_shot].fired_upon == false
         pc_shot = @player.board.cells.keys.sample(1).join
       end
       @player.board.cells[pc_shot].fire_upon
-      puts "Thier shot on #{pc_shot} #{player_status(pc_shot)}"
+      puts "Thier shot on #{pc_shot} #{@player.status(pc_shot)}"
     end
 
-    def pc_status(x)
-      if @pc.board.cells[x].render == "H"
-        "hit a ship!"
-      elsif
-        @pc.board.cells[x].render == "M"
-        "missed!"
-      else @pc.board.cells[x].render == "X"
-        "sunk the a ship!"
-      end
-    end
-
-    def player_status(x)
-      if @player.board.cells[x].render == "H"
-        "hit a ship!"
-      elsif
-        @player.board.cells[x].render == "M"
-        "missed!"
-      else @player.board.cells[x].render == "X"
-        "sunk the a ship!"
-      end
-    end
 
   end
 

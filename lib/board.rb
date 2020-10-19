@@ -49,6 +49,7 @@ class Board
     return false if coordinates.any? do |coordinate|
       @cells[coordinate].ship
     end
+
     # CHECK IF RIGHT NUMBER OF SPACES
     # return false if ship.length != coordinates.length
     # CHECK EITHER NUMS OR LETTERS ARE SAME
@@ -65,7 +66,7 @@ class Board
     end)
     # CHECK IF CONSECUTIVE, BUT NOT DIAGONAL
     return false if (ascii.last - ascii.first) != ship.length - 1
-    true
+    return true
   end
 
   def place(ship,coordinate)
