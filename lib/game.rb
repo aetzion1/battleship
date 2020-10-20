@@ -101,7 +101,15 @@ class Game
       puts "Your shot on #{player_shot} #{@pc.status(player_shot)}"
 
       #PC Shoots
-      pc_shot= @player.board.cells.keys.sample(1).join
+      pc_shot= @player_board.cells.keys.sample(1).join
+
+      until @player_board.cells[pc_shot].fired_upon == false
+        pc_shot = @player_board.cells.keys.sample(1).join
+      end
+      @player_board.cells[pc_shot].fire_upon
+      puts "Thier shot on #{pc_shot} #{player_status(pc_shot)}"
+    end
+
 
       #reports resulte
       until @player.board.cells[pc_shot].fired_upon == false
