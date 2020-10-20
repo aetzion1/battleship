@@ -19,4 +19,10 @@ class PlayerTest < Minitest::Test
 
     assert_instance_of Board, pc1.board
   end
+
+  def test_pc_has_cruiser
+    pc1 = Player.new
+
+    assert_instance_of Ship, pc1.cruiser
+  end
 end
