@@ -103,7 +103,7 @@ class Game
         pc_shot = @player.board.cells.keys.sample(1).join
       end
       @player.board.cells[pc_shot].fire_upon
-      puts "Thier shot on #{pc_shot} #{@player.status(pc_shot)}"
+      puts "Their shot on #{pc_shot} #{@player.status(pc_shot)}"
       end
 
   end
