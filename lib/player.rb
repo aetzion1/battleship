@@ -2,7 +2,7 @@ require 'pry'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
-
+"hit"
 class Player
   attr_reader :board, :cruiser, :submarine, :status
 
@@ -19,7 +19,7 @@ class Player
       @board.cells[x].render == "M"
       "missed!"
     else @board.cells[x].render == "X"
-      "sunk the a ship!"
+      "sunk a ship!"
     end
   end
 

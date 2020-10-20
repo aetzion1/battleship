@@ -19,7 +19,7 @@ class Pc
       @board.cells[x].render == "M"
       "missed!"
     else @board.cells[x].render == "X"
-      "sunk the a ship!"
+      "sunk a ship!"
     end
   end
 
