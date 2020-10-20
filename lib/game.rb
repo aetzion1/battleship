@@ -39,7 +39,7 @@ class Game
       turn
     end
      p victory
-    
+
     # loop turn
     #  if victory
     #    break
