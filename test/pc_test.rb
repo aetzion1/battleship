@@ -31,4 +31,15 @@ class PlayerTest < Minitest::Test
 
     assert_instance_of Ship, pc1.submarine
   end
+
+  def test_pc_board_status_hit
+    pc1 = Player.new
+    pc1.board.place(pc1.submarine, ["A1", "A2"])
+    pc1.board.cells["A1"].fire_upon
+
+    assert_equal "hit a ship!", pc1.status("A1")
+  end
+
+
+
 end
