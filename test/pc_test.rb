@@ -13,4 +13,10 @@ class PlayerTest < Minitest::Test
 
     assert_instance_of Player, pc1
   end
+
+  def test_pc_has_board
+    pc1 = Player.new
+
+    assert_instance_of Board, pc1.board
+  end
 end
