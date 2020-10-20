@@ -35,7 +35,15 @@ class Game
     setup_sub
     puts @player.board.render(true)
     setup_pc_board
-    turn
+    until @pc.cruiser.sunk? && @pc.submarine.sunk? || @player.cruiser.sunk? && @player.submarine.sunk?
+      turn
+    end
+     p victory
+    
+    # loop turn
+    #  if victory
+    #    break
+    #  end
   end
 
   def setup_pc_board
@@ -79,6 +87,14 @@ class Game
     end
   end
 
+    def victory
+      if @pc.cruiser.sunk? && @pc.submarine.sunk?
+          "I underestimated you! Victory is yours!"
+      else @player.cruiser.sunk? && @player.submarine.sunk?
+          "You weren't worthy... Come back if you dare!"
+      end
+    end
+
   def turn
     puts "=============COMPUTER BOARD=============\n"
      @pc.board.render(true)#Remember to remove true
@@ -103,7 +119,7 @@ class Game
         pc_shot = @player.board.cells.keys.sample(1).join
       end
       @player.board.cells[pc_shot].fire_upon
-      puts "Thier shot on #{pc_shot} #{@player.status(pc_shot)}"
+      puts "Their shot on #{pc_shot} #{@player.status(pc_shot)}"
       end
 
   end
