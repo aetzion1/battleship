@@ -47,4 +47,13 @@ class PlayerTest < Minitest::Test
 
     assert_equal "missed!", player1.status("A3")
   end
+
+  def test_pc_board_status_sunk
+    player1 = Player.new
+    player1.board.place(player1.submarine, ["A1", "A2"])
+    player1.board.cells["A1"].fire_upon
+    player1.board.cells["A2"].fire_upon
+
+    assert_equal "sunk a ship!", player1.status("A1")
+  end
 end
