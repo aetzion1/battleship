@@ -97,9 +97,9 @@ class Game
 
   def turn
     puts "=============COMPUTER BOARD=============\n"
-     @pc.board.render(true)#Remember to remove true
+    puts @pc.board.render(true)#Remember to remove true
     puts "==============PLAYER BOARD==============\n"
-     @player.board.render(true)
+    puts @player.board.render(true)
 
     puts "Enter the coordinate for your shot:"
       player_shot = gets.chomp.upcase

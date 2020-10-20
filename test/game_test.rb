@@ -20,7 +20,7 @@ class GameTest < Minitest::Test
 
     assert_instance_of Game, @game
   end
-x
+
   def test_victory
     @game.victory
     expected = "You weren't worthy... Come back if you dare!"
