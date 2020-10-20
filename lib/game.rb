@@ -8,7 +8,7 @@ require './lib/valid_placement'
 require 'pry'
 
 class Game
-  attr_reader :player_board, :pc_board, :cruiser, :submarine
+  attr_reader :cruiser, :submarine
   include Messages
 
   def initialize
@@ -30,15 +30,11 @@ class Game
   def setup
     setup_message
     puts @player.board.render()
-
     setup_cruiser
     puts @player.board.render(true)
-
     setup_sub
     puts @player.board.render(true)
-
     setup_pc_board
-    # puts @pc_board.render(true)
     turn
   end
 
@@ -101,27 +97,13 @@ class Game
       puts "Your shot on #{player_shot} #{@pc.status(player_shot)}"
 
       #PC Shoots
-      pc_shot= @player_board.cells.keys.sample(1).join
+      pc_shot= @player.board.cells.keys.sample(1).join
 
-      until @player_board.cells[pc_shot].fired_upon == false
-        pc_shot = @player_board.cells.keys.sample(1).join
-      end
-      @player_board.cells[pc_shot].fire_upon
-      puts "Thier shot on #{pc_shot} #{player_status(pc_shot)}"
-    end
-
-
-      #reports resulte
       until @player.board.cells[pc_shot].fired_upon == false
         pc_shot = @player.board.cells.keys.sample(1).join
       end
       @player.board.cells[pc_shot].fire_upon
       puts "Thier shot on #{pc_shot} #{@player.status(pc_shot)}"
-    end
-
+      end
 
   end
-
-#Turns until no ship on one side
-#Declare winner
-# break when either pc_board.ships sunk? or player_board ships usnk
