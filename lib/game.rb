@@ -35,7 +35,15 @@ class Game
     setup_sub
     puts @player.board.render(true)
     setup_pc_board
-    turn
+    until @pc.cruiser.sunk? && @pc.submarine.sunk? || @player.cruiser.sunk? && @player.submarine.sunk?
+      turn
+    end
+     p victory
+    
+    # loop turn
+    #  if victory
+    #    break
+    #  end
   end
 
   def setup_pc_board
@@ -78,6 +86,14 @@ class Game
     else setup_sub
     end
   end
+
+    def victory
+      if @pc.cruiser.sunk? && @pc.submarine.sunk?
+          "I underestimated you! Victory is yours!"
+      else @player.cruiser.sunk? && @player.submarine.sunk?
+          "You weren't worthy... Come back if you dare!"
+      end
+    end
 
   def turn
     puts "=============COMPUTER BOARD=============\n"
