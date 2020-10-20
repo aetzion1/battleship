@@ -13,7 +13,7 @@ class Game
 
   def initialize
     @player = Player.new
-    @pc = Player.new
+    @pc = Pc.new
   end
 
   def start
@@ -34,7 +34,7 @@ class Game
     puts @player.board.render(true)
     setup_sub
     puts @player.board.render(true)
-    setup_pc_board
+    @pc.setup_pc_board
     until @pc.cruiser.sunk? && @pc.submarine.sunk? || @player.cruiser.sunk? && @player.submarine.sunk?
       turn
     end
@@ -46,19 +46,19 @@ class Game
     #  end
   end
 
-  def setup_pc_board
-    pc_coord = @pc.board.cells.keys.sample(3)
-    until @pc.board.valid_placement?(@pc.cruiser, pc_coord)
-      pc_coord = @pc.board.cells.keys.sample(3)
-    end
-    @pc.board.place(@pc.cruiser, pc_coord)
-
-    pc_coord_2 = @pc.board.cells.keys.sample(2)
-    until @pc.board.valid_placement?(@pc.submarine, pc_coord_2)
-      pc_coord_2 = @pc.board.cells.keys.sample(2)
-    end
-    @pc.board.place(@pc.submarine, pc_coord_2)
-  end
+  # def setup_pc_board
+  #   pc_coord = @pc.board.cells.keys.sample(3)
+  #   until @pc.board.valid_placement?(@pc.cruiser, pc_coord)
+  #     pc_coord = @pc.board.cells.keys.sample(3)
+  #   end
+  #   @pc.board.place(@pc.cruiser, pc_coord)
+  #
+  #   pc_coord_2 = @pc.board.cells.keys.sample(2)
+  #   until @pc.board.valid_placement?(@pc.submarine, pc_coord_2)
+  #     pc_coord_2 = @pc.board.cells.keys.sample(2)
+  #   end
+  #   @pc.board.place(@pc.submarine, pc_coord_2)
+  # end
 
   def setup_cruiser
     player_cruiser_message
@@ -97,9 +97,9 @@ class Game
 
   def turn
     puts "=============COMPUTER BOARD=============\n"
-     @pc.board.render(true)#Remember to remove true
+    puts @pc.board.render(true)#Remember to remove true
     puts "==============PLAYER BOARD==============\n"
-     @player.board.render(true)
+    puts @player.board.render(true)
 
     puts "Enter the coordinate for your shot:"
       player_shot = gets.chomp.upcase

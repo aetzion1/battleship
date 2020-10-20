@@ -7,7 +7,7 @@ require './lib/board'
 require './lib/player'
 require './lib/game.rb'
 
-class PlayerTest < Minitest::Test
+class PCTest < Minitest::Test
   def test_it_exists
     pc1 = Pc.new
 

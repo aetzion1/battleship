@@ -23,4 +23,18 @@ class Pc
     end
   end
 
+  def setup_pc_board
+    pc_coord = @board.cells.keys.sample(3)
+    until @board.valid_placement?(@cruiser, pc_coord)
+      pc_coord = @board.cells.keys.sample(3)
+    end
+    @board.place(@cruiser, pc_coord)
+
+    pc_coord_2 = @board.cells.keys.sample(2)
+    until @board.valid_placement?(@submarine, pc_coord_2)
+      pc_coord_2 = @board.cells.keys.sample(2)
+    end
+    @board.place(@submarine, pc_coord_2)
+  end
+
 end
