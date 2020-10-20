@@ -24,4 +24,10 @@ class PlayerTest < Minitest::Test
 
     assert_instance_of Ship, player1.cruiser
   end
+
+  def test_player_has_sub
+    player1 = Player.new
+
+    assert_instance_of Ship, player1.submarine
+  end
 end
