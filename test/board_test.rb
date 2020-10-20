@@ -3,6 +3,7 @@ require 'Minitest/pride'
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
+require './lib/valid_placement'
 require 'pry'
 
 class BoardTest < Minitest::Test
@@ -11,7 +12,7 @@ class BoardTest < Minitest::Test
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
   end
-# binding.pry
+
   def test_it_exists
     assert_instance_of Board, @board
   end
@@ -58,7 +59,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_edge_case
-    # skip
+
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "C1"])
   end
 
