@@ -5,6 +5,7 @@ require './lib/cell'
 require './lib/ship'
 require './lib/board'
 require './lib/player'
+require './lib/game.rb'
 
 class PlayerTest < Minitest::Test
   def test_it_exists
@@ -30,4 +31,5 @@ class PlayerTest < Minitest::Test
 
     assert_instance_of Ship, player1.submarine
   end
+
 end
