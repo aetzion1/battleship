@@ -4,7 +4,7 @@ require './lib/ship'
 require './lib/cell'
 require "pry"
 
-class Test < Minitest::Test
+class CellTest < Minitest::Test
 
   def setup
     @cell = Cell.new("B4")
