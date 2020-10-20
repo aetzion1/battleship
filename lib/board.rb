@@ -1,10 +1,10 @@
 require 'pry'
 require './lib/cell'
 require './lib/ship'
-require './lib/valid_placement'
+
 
 class Board
-  attr_reader :cells, :row, :columm, :statusk
+  attr_reader :cells, :row, :columm, :status
 
   def initialize(board_size = 4)
     @board_size = board_size
@@ -34,8 +34,40 @@ class Board
   end
 
   def valid_placement?(ship, coordinates = [])
-    @valid_placement.same_length_as_ship
+    # CHANGE LETTERS TO ASCII
+    letters = coordinates.map do |coordinate|
+      coordinate.ord
+    end
+    # CHANGE NUMBERS TO ascii
+    numbers = coordinates.map do |coordinate|
+      coordinate.slice(1).to_i
+    end
+    # CHANGE LETTER+NUMBER TO ASCII
+    ascii = coordinates.map do |coordinate|
+      coordinate.bytes.inject(:+)
+    end
+    # CHECK IF HAS SHIP
+    return false if coordinates.any? do |coordinate|
+      @cells[coordinate].ship
+    end
 
+    # CHECK IF RIGHT NUMBER OF SPACES
+    return false if ship.length != coordinates.length
+    # CHECK EITHER NUMS OR LETTERS ARE SAME
+    return false if numbers.uniq.length !=1 && letters.uniq.length !=1
+    # CHECK IF LETTERS SAME and NUMS CONS
+    return false if (letters.uniq.length == 1) &&
+    !(numbers.each_cons(2).all? do |number|
+      p number
+    end)
+    # CHECK IF NUMS SAME AND LETTERS CONS
+    return false if (numbers.uniq.length == 1) &&
+    !(letters.each_cons(2).all? do |letter|
+      p letter
+    end)
+    # CHECK IF CONSECUTIVE, BUT NOT DIAGONAL
+    return false if (ascii.last - ascii.first) != ship.length - 1 && (ascii.max - ascii.min) != ship.length - 1
+    return true
 
   end
 

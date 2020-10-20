@@ -4,16 +4,16 @@ require './lib/board'
 require './lib/cell'
 require './lib/ship'
 require './lib/messages'
+require './lib/valid_placement'
 require 'pry'
 
 class Game
-  attr_reader :player_board, :pc_board, :cruiser, :submarine, :pc_cruiser, :pc_submarine
+  attr_reader :player_board, :pc_board, :cruiser, :submarine
   include Messages
 
   def initialize
     @player = Player.new
     @pc = Player.new
-
   end
 
   def start
@@ -103,7 +103,7 @@ class Game
       #PC Shoots
       pc_shot= @player.board.cells.keys.sample(1).join
 
-
+      #reports resulte
       until @player.board.cells[pc_shot].fired_upon == false
         pc_shot = @player.board.cells.keys.sample(1).join
       end

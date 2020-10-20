@@ -3,6 +3,7 @@ require 'Minitest/pride'
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
+require './lib/valid_placement'
 require 'pry'
 
 class BoardTest < Minitest::Test
@@ -58,7 +59,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_edge_case
-    
+
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "C1"])
   end
 
