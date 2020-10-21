@@ -7,8 +7,6 @@ require './lib/ship'
 require './lib/board'
 require './lib/game'
 
-
-
 class GameTest < Minitest::Test
 
   def setup
@@ -22,9 +20,9 @@ class GameTest < Minitest::Test
 
   def test_victory
     @game.victory
+
     expected = "You weren't worthy... Come back if you dare!"
 
     assert_equal expected, @game.victory
   end
-
 end
