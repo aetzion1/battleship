@@ -26,10 +26,13 @@ class Cell
 
   def render(option = nil)
     # switch or case statement
-    if option == true && @ship
-      "S"
-    elsif @fired_upon == false
-      "."
+
+    if @fired_upon == false
+      if option == true && @ship
+            "S"
+          else
+            "."
+      end
     elsif @ship == nil
       "M"
     elsif
