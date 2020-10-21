@@ -1,11 +1,10 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'pry'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
-require './lib/player'
-require './lib/game.rb'
+require './lib/pc'
+require './lib/game'
 
 class PCTest < Minitest::Test
   def test_it_exists
@@ -56,5 +55,4 @@ class PCTest < Minitest::Test
 
     assert_equal "sunk a ship!", pc1.status("A1")
   end
-
 end

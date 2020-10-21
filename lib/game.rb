@@ -5,7 +5,6 @@ require './lib/cell'
 require './lib/ship'
 require './lib/messages'
 require './lib/valid_placement'
-require 'pry'
 
 class Game
   attr_reader :cruiser, :submarine
@@ -36,29 +35,11 @@ class Game
     puts @player.board.render(true)
     @pc.setup_pc_board
     until @pc.cruiser.sunk? && @pc.submarine.sunk? || @player.cruiser.sunk? && @player.submarine.sunk?
+      sleep(2)
       turn
     end
      p victory
-
-    # loop turn
-    #  if victory
-    #    break
-    #  end
   end
-
-  # def setup_pc_board
-  #   pc_coord = @pc.board.cells.keys.sample(3)
-  #   until @pc.board.valid_placement?(@pc.cruiser, pc_coord)
-  #     pc_coord = @pc.board.cells.keys.sample(3)
-  #   end
-  #   @pc.board.place(@pc.cruiser, pc_coord)
-  #
-  #   pc_coord_2 = @pc.board.cells.keys.sample(2)
-  #   until @pc.board.valid_placement?(@pc.submarine, pc_coord_2)
-  #     pc_coord_2 = @pc.board.cells.keys.sample(2)
-  #   end
-  #   @pc.board.place(@pc.submarine, pc_coord_2)
-  # end
 
   def setup_cruiser
     player_cruiser_message
@@ -97,7 +78,7 @@ class Game
 
   def turn
     puts "=============COMPUTER BOARD=============\n"
-    puts @pc.board.render(true)#Remember to remove true
+    puts @pc.board.render
     puts "==============PLAYER BOARD==============\n"
     puts @player.board.render(true)
 
@@ -112,7 +93,6 @@ class Game
       @pc.board.cells[player_shot].fire_upon
       puts "Your shot on #{player_shot} #{@pc.status(player_shot)}"
 
-      #PC Shoots
       pc_shot= @player.board.cells.keys.sample(1).join
 
       until @player.board.cells[pc_shot].fired_upon == false
@@ -121,5 +101,4 @@ class Game
       @player.board.cells[pc_shot].fire_upon
       puts "Their shot on #{pc_shot} #{@player.status(pc_shot)}"
       end
-
   end

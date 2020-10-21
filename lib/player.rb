@@ -1,8 +1,7 @@
-require 'pry'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
-"hit"
+
 class Player
   attr_reader :board, :cruiser, :submarine, :status
 
@@ -12,15 +11,14 @@ class Player
     @submarine = Ship.new("Submarine", 2)
   end
 
-  def status(x)
-    if @board.cells[x].render == "H"
+  def status(coordinate)
+    if @board.cells[coordinate].render == "H"
       "hit a ship!"
     elsif
-      @board.cells[x].render == "M"
+      @board.cells[coordinate].render == "M"
       "missed!"
-    else @board.cells[x].render == "X"
+    else @board.cells[coordinate].render == "X"
       "sunk a ship!"
     end
   end
-
 end

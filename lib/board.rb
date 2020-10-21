@@ -1,4 +1,3 @@
-require 'pry'
 require './lib/cell'
 require './lib/ship'
 require './lib/valid_placement'
@@ -44,16 +43,15 @@ class Board
 
   def place(ship,coordinate)
     if coordinate.all? do |coordinate|
-       @cells[coordinate].empty?
-     end
-   end
+      @cells[coordinate].empty?
+      end
+    end
    coordinate.each do |coordinate|
      @cells[coordinate].place_ship(ship)
    end
  end
 
  def render(option = nil)
-  #USE CONCAT TO MAKE IT DYNAMIC (BASED ON BOARD SIZE)
   " 1 2 3 4 \n" +
     "A #{@cells["A1"].render(option)} #{@cells["A2"].render(option)} #{@cells["A3"].render(option)} #{@cells["A4"].render(option)}\n" +
     "B #{@cells["B1"].render(option)} #{@cells["B2"].render(option)} #{@cells["B3"].render(option)} #{@cells["B4"].render(option)}\n" +

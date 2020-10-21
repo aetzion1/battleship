@@ -7,10 +7,7 @@ class Cell
   end
 
   def empty?
-    if @ship == nil
-      true
-    else false
-    end
+    @ship == nil
   end
 
   def place_ship(ship_name)
@@ -25,11 +22,12 @@ class Cell
     end
 
   def render(option = nil)
-    # switch or case statement
-    if option == true && @ship
-      "S"
-    elsif @fired_upon == false
-      "."
+    if @fired_upon == false
+      if option == true && @ship
+            "S"
+          else
+            "."
+      end
     elsif @ship == nil
       "M"
     elsif

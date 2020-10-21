@@ -3,7 +3,6 @@ module Messages
   def welcome_message
     puts "Welcome to BATTLESHIP\n
     Enter p to play. Enter q to quit."
-
     print "> "
   end
 
