@@ -12,10 +12,6 @@ class Ship
   end
 
   def sunk?
-  if @health == 0
-    true
-  else
-    false
+    @health == 0
   end
-end
 end

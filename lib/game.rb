@@ -36,6 +36,7 @@ class Game
     puts @player.board.render(true)
     @pc.setup_pc_board
     until @pc.cruiser.sunk? && @pc.submarine.sunk? || @player.cruiser.sunk? && @player.submarine.sunk?
+      sleep(2)
       turn
     end
      p victory
