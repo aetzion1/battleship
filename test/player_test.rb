@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'pry'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
@@ -8,6 +7,7 @@ require './lib/player'
 require './lib/game.rb'
 
 class PlayerTest < Minitest::Test
+
   def test_it_exists
     player1 = Player.new
 
